@@ -7,10 +7,11 @@ class Categories extends Component {
     super(props);
 
     this.state = {
-      categories: []
+      categories: [],
     }
   }
   componentDidMount() {
+    console.log(this.props)
     var {category} = this.props.match.params;
     request.get('https://mallory-furniture-admin.now.sh/api/v1/products?category=' + category )
       .then((response) => {
@@ -21,7 +22,7 @@ class Categories extends Component {
   }
   componentDidUpdate(prevProps) {
     var {category} = this.props.match.params;
-    if(this.props.match.params !== prevProps.match.params){
+    if(this.props.match.params.category !== prevProps.match.params.category){
       request.get('https://mallory-furniture-admin.now.sh/api/v1/products?category=' + category )
         .then((response) => {
           this.setState({
@@ -54,9 +55,45 @@ class Categories extends Component {
     });
   };
 
+  selectImage = (category) =>{
+
+      switch (category){
+        case "bedroom":
+        return require('../images/category-bedroom.png')
+        break;
+
+        case "seating":
+        return require('../images/category-seating.png')
+        break;
+
+        case "tables":
+        return require('../images/category-tables.png');
+        break;
+
+        case "desks":
+        return require('../images/category-desks.png');
+        break;
+
+        case "storage":
+        return require('../images/category-storage.png');
+        break;
+
+        case "miscellaneous":
+        return require('../images/category-miscellaneous.png');
+        break;
+
+        default:
+        return ('Image not found');
+        break;
+      }
+    }
+
   render(){
     return(
       <div className="prodcuts">
+        <div className="products__catslider">
+          <img className="img__cat" src={ this.selectImage(this.props.match.params.category)} alt="Category"/>
+        </div>
         <div className="products__cards">
           <h1> {this.props.match.params.category.toUpperCase()} </h1>
           <h3>All {this.props.match.params.category} products</h3>

@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
 import logowhite from '../images/logowhite.svg';
-import shoppingCart from '../images/shopping-cart.svg';
-
 import {Link} from 'react-router-dom';
 
 class Navbar extends Component {
@@ -22,8 +20,8 @@ class Navbar extends Component {
             <li><Link className="menu__blue" to="/categories/bedroom">Bedroom</Link></li>
             <li><Link className="menu__blue" to="/categories/miscellaneous">Misc</Link></li>
             <li> | </li>
-            <button className="shopping__btn">
-            <img className="shopping__cart" src={shoppingCart} alt="shopping cart" />
+            <button onClick={this.props.toggleCart} className="shopping__btn">
+            <i class="fas fa-shopping-cart"></i>
             </button>
           </ul>
         </React.Fragment>

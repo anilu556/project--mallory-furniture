@@ -14,7 +14,6 @@ class Single extends Component {
     var {productId} = this.props.match.params;
     request.get('https://mallory-furniture-admin.now.sh/api/v1/products/' + productId )
       .then((response) => {
-        console.log(response.body)
         this.setState({
         items: response.body
         });
@@ -46,7 +45,7 @@ class Single extends Component {
                 <span> H:{ this.state.items.height }</span>
               </div>
               <div className="btn">
-                <button className="button__add">Add to Cart</button>
+                <button onClick={ () => this.props.addToCart(this.state.items)} className="button__add">Add to Cart</button>
               </div>
             </div>
           </div>
